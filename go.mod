@@ -1,3 +1,3 @@
-module github.com/jsaddiction/kodi_librarian
+module kodi_librarian
 
-go 1.22
+go 1.22.5

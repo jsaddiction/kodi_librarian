@@ -6,7 +6,6 @@ WORKDIR /app
 
 # Copy go mod and sum files
 COPY go.mod go.sum ./
-RUN go mod tidy
 
 # Download all dependencies. Dependencies will be cached if the go.mod and go.sum files are not changed
 # RUN go mod download
@@ -20,7 +19,7 @@ RUN go build -o main ./src/main.go
 # Start a new stage from scratch
 FROM mcr.microsoft.com/vscode/devcontainers/go:1
 
-WORKDIR /root/
+WORKDIR /workspace
 
 # install git
 RUN apt-get update && apt-get install -y git
@@ -32,7 +31,7 @@ RUN apt-get update && apt-get install -y git
 COPY --from=builder /app/main /usr/local/bin
 
 # Set executable perms
-RUN chmod +x ./main
+RUN chmod +x /usr/local/bin/main
 
 # Expose port 8080 to the outside world
 # EXPOSE 8080
