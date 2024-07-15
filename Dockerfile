@@ -11,10 +11,10 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 # Copy the source from the current directory to the Working Directory inside the container
-COPY . .
+COPY src/ ./src/
 
 # Build the Go app
-RUN go build -o main .
+RUN go build -o main ./src/main.go
 
 # Start a new stage from scratch
 FROM alpine:latest
@@ -28,7 +28,7 @@ RUN apk add --no-cache sqlite-libs
 COPY --from=builder /app/main .
 
 # Expose port 8080 to the outside world
-EXPOSE 8080
+# EXPOSE 8080
 
 # Command to run the executable
 CMD ["./main"]
