@@ -8,8 +8,8 @@
   "context": "..",
   "workspaceFolder": "/workspace",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
-  "remoteUser": "docker",
-  "containerUser": "docker",
+  "remoteUser": "root",
+  // "containerUser": "",
   "runArgs": ["--network=internal"],
   "customizations": {
     "vscode": {
