@@ -1,4 +1,4 @@
-package kodi_librarian
+package main
 
 import (
 	"fmt"

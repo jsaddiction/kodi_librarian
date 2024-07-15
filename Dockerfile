@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install -y git
 # RUN apk add --no-cache sqlite-libs
 
 # Copy the Pre-built binary file from the previous stage
-COPY --from=builder /app/main /usr/local/bin
+COPY --from=builder /app/main /usr/local/bin/main
 
 # Set executable perms
 RUN chmod +x /usr/local/bin/main
