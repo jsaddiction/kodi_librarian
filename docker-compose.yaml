@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  kodi_librarian:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    container_name: kodi_librarian
+    volumes:
+      - .:/app
+    networks:
+      - internal
+    # command: "sleep infinity"
+
+networks:
+  internal:
+    name: internal
+    external: true

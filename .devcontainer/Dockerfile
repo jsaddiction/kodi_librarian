@@ -2,16 +2,26 @@
 
 # Build Stage
 FROM golang:1.22.5 as builder
+
+# Download packages
 WORKDIR /app
-COPY ../go.mod ../go.sum ./
+COPY go.mod go.sum ./
 RUN go mod download
-COPY ../src ./src
+
+# Copy source files and build binary
+COPY . .
 WORKDIR /app/src
 RUN go build -o kodi_librarian .
 
 # Final Stage
 FROM mcr.microsoft.com/vscode/devcontainers/go:1
+
+# Install packages
 RUN apt-get update && apt-get install -y git
-WORKDIR /root/
-COPY --from=builder /app/src/kodi_librarian .
-CMD ["./kodi_librarian"]
+
+# Copy all files into workspace
+WORKDIR /opt/kodi_librarian/
+COPY --from=builder /app .
+
+# Run the application
+CMD ["./src/kodi_librarian"]
