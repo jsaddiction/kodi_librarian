@@ -11,7 +11,9 @@ RUN go mod download
 # Copy source files and build binary
 COPY . .
 WORKDIR /app/src
-RUN go build -o kodi_librarian .
+
+# Build binary
+RUN go build -o /bin/kodi_librarian/kodi_librarian .
 
 # Final Stage
 FROM mcr.microsoft.com/vscode/devcontainers/go:1
@@ -24,4 +26,4 @@ WORKDIR /opt/kodi_librarian/
 COPY --from=builder /app .
 
 # Run the application
-CMD ["./src/kodi_librarian"]
+CMD ["/bin/kodi_librarian/kodi_librarian"]
