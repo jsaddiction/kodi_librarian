@@ -15,7 +15,7 @@ COPY . .
 WORKDIR /app/src
 
 # Build binary
-RUN go build -o /kodi_librarian .
+RUN go build -o /bin/kodi_librarian .
 
 # Final Stage
 FROM mcr.microsoft.com/vscode/devcontainers/go:1
@@ -23,9 +23,13 @@ FROM mcr.microsoft.com/vscode/devcontainers/go:1
 # Install packages
 RUN apt-get update && apt-get install -y git
 
+# Copy binary
+WORKDIR /bin
+COPY --from=builder /bin/kodi_librarian .
+
 # Copy all files into workspace
-WORKDIR /opt/kodi_librarian
+WORKDIR /app
 COPY --from=builder /app .
 
 # Run the application
-CMD ["/kodi_librarian"]
+CMD ["/bin/kodi_librarian"]

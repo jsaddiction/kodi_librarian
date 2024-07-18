@@ -5,7 +5,7 @@ services:
       dockerfile: .devcontainer/Dockerfile
     container_name: kodi_librarian
     volumes:
-      - .:/app
+      - ./:/app
     networks:
       - internal
     # command: "sleep infinity"

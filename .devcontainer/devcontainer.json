@@ -4,7 +4,7 @@
   "name": "Go",
   "dockerComposeFile": "../docker-compose.yaml",
   "service": "kodi_librarian",
-  "workspaceFolder": "/opt/kodi_librarian/",
+  "workspaceFolder": "/app/",
   "remoteUser": "root",
   "customizations": {
     "vscode": {
